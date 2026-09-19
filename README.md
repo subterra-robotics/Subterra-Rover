@@ -28,7 +28,7 @@ Early design. Currently Designing Rover, testing electrical components, and rese
 ```
 firmware/       Rover firmware
 hardware/       Schematics, PCB layouts, BOM
-tools/       Offloading and reviewing recorded video
+tools/          Offloading and reviewing recorded video
 docs/           Design notes, test logs, protocol spec
 
 ```
@@ -37,10 +37,11 @@ docs/           Design notes, test logs, protocol spec
 
 | Subsystem | Part | Status |
 |---|---|---|
-| MCU | ESP32 | Selected |
+| MCU (Rover) | ESP32 | Selected |
 | Camera | TBD | Not selected |
-| Drive | TBD | Not selected |
-| Sensors | TBD | Not selected |
+| MCU (Camera) | TBD | Not selected |
+| Video Storage | TBD | Not selected |
+| Sensors | IMU / accelerometer | Possibly more |
 | Power | TBD | Not selected |
 
 Update this table as decisions land. Record the reasoning in `docs/`, not here.
