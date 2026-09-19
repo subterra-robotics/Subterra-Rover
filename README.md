@@ -1,22 +1,34 @@
 # Sewer Rover
 
-Teleoperated rover for inspecting and mapping sewer systems, using surface manholes as fixed nodes in a wireless mesh to relay data and localize the rover between junctions.
+Autonomous rover that drives itself through newly installed sewer pipe and records video for inspection, using sonar and an IMU to steer and adjust speed on grade changes — no tether, no range limit.
 
 ## Overview
 
-Sewer pipes block conventional radio, and junction locations away from manholes are often undocumented. This project puts a rover in the pipe and a mesh node at each manhole, so the rover stays in contact with the surface as it moves and the team can map junctions that aren't on any existing drawing.
+### Problem
+Pipe is inspected during installation, before it goes into service. The standard tool is a tethered CCTV crawler, which is limited to about 1000 ft of cable. Crews hit that limit partway down a run and have to stop wherever the tether ends rather than wherever makes sense.
 
-Two parts:
+Cutting the tether removes the limit. If the rover drives itself, it doesn't need a live control link — only the recorded video matters, and that can be pulled off the rover when it comes out.
 
-- **Rover** — drives through the pipe, carries the sensor payload and a radio, streams data back.
-- **Manhole nodes** — fixed units dropped at each manhole, relaying rover traffic to the operator and acting as known reference points for localization.
+### Approach
+
+The rover runs the length of the pipe under its own control and stores video onboard.
+
+- Camera — records the pipe wall for later review
+- Sonar — distance to the pipe wall, used to stay centered and detect the end of the run
+- IMU / accelerometer — pitch and roll, so the rover knows when it's on an incline or decline
+- MCU — reads the sensors and decides steering and speed; slows on declines, adds power on inclines
+
+## Status
+
+Early design. Currently Designing Rover, testing electrical components, and researching Camera and camera MCU.
+
 
 ## Repo structure
 
 ```
 firmware/       Rover firmware
 hardware/       Schematics, PCB layouts, BOM
-host/           Operator-side tooling
+tools/       Offloading and reviewing recorded video
 docs/           Design notes, test logs, protocol spec
 
 ```
@@ -25,9 +37,8 @@ docs/           Design notes, test logs, protocol spec
 
 | Subsystem | Part | Status |
 |---|---|---|
-| MCU (rover) | TBD | Not selected |
-| Comms / radio | TBD | Under evaluation |
-| Antenna | TBD | Under evaluation |
+| MCU | ESP32 | Selected |
+| Camera | TBD | Not selected |
 | Drive | TBD | Not selected |
 | Sensors | TBD | Not selected |
 | Power | TBD | Not selected |
@@ -36,27 +47,15 @@ Update this table as decisions land. Record the reasoning in `docs/`, not here.
 
 ## Getting started
 
-```bash
-git clone <repo-url>
-cd sewer-rover
-```
 
-Build and flash instructions go here once the toolchain is fixed.
-
-## Status
-
-Early design. Currently deciding on the comms and antenna setup for the rover.
 
 ## Team
 
-- Yunus Hassen — Computer Engineer
-    -> Worked on firmware and electrical components 
+- Yunus Hassen — Computer Engineer -> firmware and electronics
     
-- Nael Shakhsheer — Mechanical Engineer
-    -> Worked on rover Physical design and printing
+- Nael Shakhsheer — Mechanical Engineer -> rover chassis design and 3D printing
 
-- Hannan Ahmed — Cybersecurity Engineer
-    -> Worked on recording camera integration
+- Hannan Ahmed — Cybersecurity Engineer -> camera integration and recording
 
 ## Contributing
 
