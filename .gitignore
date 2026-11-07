@@ -1,1 +1,29 @@
-.pio
+# ---- PlatformIO / build ----
+.pio/
+*.bin
+*.elf
+
+# ---- Editors (keep the recommended-extensions list) ----
+.vscode/*
+**/.vscode/*
+!**/.vscode/extensions.json
+
+# ---- Python ----
+__pycache__/
+*.pyc
+
+# ---- Pi output (clips, logs, test CSVs) ----
+recordings/
+
+# ---- KiCad: backups, caches, per-user settings ----
+*-backups/
+fp-info-cache
+*.kicad_prl
+*.lck
+_autosave-*
+
+# ---- Office lock files / OS junk ----
+~$*
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "author": "Uri Shaked",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": -50.8,
+      "left": -13.84,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "PI",
+      "top": -50.8,
+      "left": 149.36,
+      "rotate": 180,
+      "attrs": {}
+    },
+    { "type": "wokwi-mpu6050", "id": "imu1", "top": 186.22, "left": -74.48, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "imu1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "imu1:VCC", "esp:3V3", "red", [ "v0", "h144.08" ] ],
+    [ "esp:21", "imu1:SDA", "green", [ "h0" ] ],
+    [ "imu1:SCL", "esp:22", "green", [ "v0" ] ],
+    [ "PI:RX", "esp:RX", "green", [ "h-28.8", "v-172.8", "h-163.2", "v182.4" ] ],
+    [ "esp:TX", "PI:TX", "green", [ "h-38.4", "v-192", "h182.4", "v192", "h19.2" ] ]
+  ],
+  "dependencies": {}
+} 
